@@ -95,3 +95,17 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.1;
     text-wrap: balance; /* helps keep titles from breaking awkwardly */
 }
+
+/* ========== Resume Specific Styles ========== */
+
+#resume > .card {
+    background-color: oklch(from var(--color-accent) 95% 5% h); /* light pink card */
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 0.5rem 1rem oklch(80% 3% 200 / 0.5);
+    margin-bottom: 2rem;
+}
+
+#resume > .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
