@@ -2,8 +2,17 @@
     --color-accent: oklch(65% 50% 0); /* A vibrant pink – customize if you like */
 }
 
+.color-scheme {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 80%;
+    font-family: inherit;
+}
+
 html {
     accent-color: var(--color-accent);
+    color-scheme: light dark;
 }
 
 body {
@@ -19,7 +28,8 @@ body {
 nav {
     display: flex;
     margin-bottom: 2em;
-    border-bottom: 1px solid oklch(80% 3% 200); /* cool gray border */
+    --border-color: oklch(50% 10% 200 / 40%); /* Cool grey border */
+    border-bottom: 1px solid var(--border-color);
 }
 
 nav ul,
@@ -42,7 +52,7 @@ nav a.current {
 
 nav a:hover {
     border-bottom: 0.4em solid var(--color-accent);
-    background-color: oklch(from var(--color-accent) 95% 5% h);
+    background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
     padding-bottom: 0.1em; /* Keeps height consistent on hover */
 }
 
@@ -61,7 +71,7 @@ button {
     box-sizing: border-box;
 }
 
-label {
+label:not(.color-scheme) {
     display: contents;
 }
 
@@ -99,13 +109,13 @@ h1, h2, h3, h4, h5, h6 {
 /* ========== Resume Specific Styles ========== */
 
 #resume > .card {
-    background-color: oklch(from var(--color-accent) 95% 5% h); /* light pink card */
+    background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
     border-radius: 1rem;
     padding: 1.5rem;
-    box-shadow: 0 0.5rem 1rem oklch(80% 3% 200 / 0.5);
+    box-shadow: 0 0.5rem 1rem color-mix(in oklch, var(--color-accent), canvas 70%);
     margin-bottom: 2rem;
 }
 
 #resume > .card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px color-mix(in oklch, var(--color-accent), canvas 50%);
 }

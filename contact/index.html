@@ -9,30 +9,32 @@
 </head>
 
 <body>
-    <nav>
+    <!-- <nav>
         <ul>
             <li><a href="../index.html">Home</a></li>
             <li><a href="../projects/index.html">Projects</a></li>
             <li><a href="../resume/index.html">Resume</a></li>
-            <li><a href="../contact/index.html" class="current">Contact</a></li>
+            <li><a href="../contact/index.html">Contact</a></li>
             <li><a href="https://github.com/vishudhshah" target="_blank">GitHub</a></li>
         </ul>
-    </nav>
+    </nav> -->
 
     <h1>Contact</h1>
 
-    <form action="mailto:v8shah@ucsd.edu" method="POST" enctype="text/plain">
-        <label for="email">Email:</label>
-        <input name="email" type="email" id="email" value="v8shah@ucsd.edu">
+    <form action="mailto:v8shah@ucsd.edu" method="GET">
+        <!-- <label for="email">Email:</label>
+        <input name="email" type="email" id="email" value="v8shah@ucsd.edu"> -->
 
         <label for="subject">Subject:</label>
-        <input name="subject" id="subject">
+        <input name="subject" id="subject" value="Hello" required>
 
         <label for="body">Body:</label>
-        <textarea name="body"></textarea>
+        <textarea name="body" required>Sup?</textarea>
 
-        <button>Submit</button>
+        <button type="submit">Submit</button> <!-- default button type in a form is submit, but good practice -->
     </form>
+
+    <script type="module" src="../global.js"></script>
 </body>
 
 </html>
