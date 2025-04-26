@@ -72,10 +72,8 @@ if ("colorScheme" in localStorage) {
     setColorScheme(localStorage.colorScheme);
 }
 
-// Contact form stuff
-
+// Contact form
 let form = document.querySelector('form');
-
 form?.addEventListener('submit', function (event) {
     event.preventDefault(); // stop the browser from submitting normally
 
@@ -89,3 +87,47 @@ form?.addEventListener('submit', function (event) {
     let url = form.action + '?' + params.join('&');
     location.href = url;
 });
+
+export async function fetchJSON(url) {
+    try {
+        // Fetch the JSON file from the given URL
+        const response = await fetch(url);
+
+        // Check if the fetch was successful
+        if (!response.ok) {
+            throw new Error(`Failed to fetch projects: ${response.statusText}`);
+        }
+
+        // Parse the JSON response
+        const data = await response.json();
+        return data;
+
+    } catch (error) {
+        console.error('Error fetching or parsing JSON data:', error);
+    }
+}
+
+export function renderProjects(projects, containerElement, headingLevel = 'h2') {
+    // 1. Clear the container first
+    containerElement.innerHTML = '';
+
+    // 2. For each project, create and add an article
+    projects.forEach((project) => {
+        // Create a new article element
+        const article = document.createElement('article');
+
+        // Set the inside HTML of the article
+        article.innerHTML = `
+            <${headingLevel}>${project.title}</${headingLevel}>
+            <img src="${project.image}" alt="${project.title}">
+            <p>${project.description}</p>
+        `;
+
+        // Add the article to the container
+        containerElement.appendChild(article);
+    });
+}
+
+export async function fetchGitHubData(username) {
+    return fetchJSON(`https://api.github.com/users/${username}`);
+}

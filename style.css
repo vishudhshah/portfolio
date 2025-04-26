@@ -1,5 +1,6 @@
 :root {
     --color-accent: oklch(65% 50% 0); /* A vibrant pink – customize if you like */
+    --label-color: color-mix(in oklch, var(--color-accent), canvas 5%);
 }
 
 .color-scheme {
@@ -56,7 +57,7 @@ nav a:hover {
     padding-bottom: 0.1em; /* Keeps height consistent on hover */
 }
 
-/* ========== Project Specific Styles ========== */
+/* --- Project Specific Styles --- */
 
 form {
     display: grid;
@@ -106,7 +107,7 @@ h1, h2, h3, h4, h5, h6 {
     text-wrap: balance; /* helps keep titles from breaking awkwardly */
 }
 
-/* ========== Resume Specific Styles ========== */
+/* --- Resume Specific Styles --- */
 
 #resume > .card {
     background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
@@ -118,4 +119,39 @@ h1, h2, h3, h4, h5, h6 {
 
 #resume > .card:hover {
     box-shadow: 0 8px 16px color-mix(in oklch, var(--color-accent), canvas 50%);
+}
+
+/* --- GH Stats --- */
+
+#profile-stats {
+    background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 0.5rem 1rem color-mix(in oklch, var(--color-accent), canvas 70%);
+    margin-bottom: 2rem;
+    max-width: 100%;
+}
+
+#profile-stats:hover {
+    box-shadow: 0 8px 16px color-mix(in oklch, var(--color-accent), canvas 50%);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
+    gap: 1rem;
+    text-align: center;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--label-color);
+    /* opacity: 0.9; */
+}
+
+.stat-value {
+    font-size: 1.75rem;
+    font-weight: bold;
 }
