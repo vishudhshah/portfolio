@@ -63,6 +63,16 @@ function renderPieChart(projectsGiven) {
                         // filter idx to find correct legend and apply CSS from above
                         idx === selectedIndex ? 'selected' : ''
                     ));
+
+                // filter projects by selected year
+                if (selectedIndex === -1) {
+                    // no selection, show all projects
+                    renderProjects(projects, projectsContainer, 'h2');
+                } else {
+                    const selectedYear = data[selectedIndex].label;
+                    const filteredProjects = projects.filter((project) => project.year === selectedYear);
+                    renderProjects(filteredProjects, projectsContainer, 'h2');
+                }
             });
     });
 
@@ -85,11 +95,13 @@ let searchInput = document.querySelector('.searchBar');
 searchInput.addEventListener('input', (event) => {
     // update query value
     query = event.target.value;
+
     // filter projects
     let filteredProjects = projects.filter((project) => {
         let values = Object.values(project).join('\n').toLowerCase();
         return values.includes(query.toLowerCase());
     });
+    
     // re-render filtered projects and pie chart
     renderProjects(filteredProjects, projectsContainer, 'h2');
     renderPieChart(filteredProjects);
