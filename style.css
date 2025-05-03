@@ -57,6 +57,55 @@ nav a:hover {
     padding-bottom: 0.1em; /* Keeps height consistent on hover */
 }
 
+/* --- Resume Specific Styles --- */
+
+#resume > .card {
+    background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 0.5rem 1rem color-mix(in oklch, var(--color-accent), canvas 70%);
+    margin-bottom: 2rem;
+}
+
+#resume > .card:hover {
+    box-shadow: 0 8px 16px color-mix(in oklch, var(--color-accent), canvas 50%);
+}
+
+/* --- GH Stats --- */
+
+#profile-stats {
+    background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 0.5rem 1rem color-mix(in oklch, var(--color-accent), canvas 70%);
+    margin-bottom: 2rem;
+    max-width: 100%;
+}
+
+#profile-stats:hover {
+    box-shadow: 0 8px 16px color-mix(in oklch, var(--color-accent), canvas 50%);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
+    gap: 1rem;
+    text-align: center;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--label-color);
+    /* opacity: 0.9; */
+}
+
+.stat-value {
+    font-size: 1.75rem;
+    font-weight: bold;
+}
+
 /* --- Project Specific Styles --- */
 
 form {
@@ -107,51 +156,63 @@ h1, h2, h3, h4, h5, h6 {
     text-wrap: balance; /* helps keep titles from breaking awkwardly */
 }
 
-/* --- Resume Specific Styles --- */
-
-#resume > .card {
-    background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
-    border-radius: 1rem;
-    padding: 1.5rem;
-    box-shadow: 0 0.5rem 1rem color-mix(in oklch, var(--color-accent), canvas 70%);
-    margin-bottom: 2rem;
-}
-
-#resume > .card:hover {
-    box-shadow: 0 8px 16px color-mix(in oklch, var(--color-accent), canvas 50%);
-}
-
-/* --- GH Stats --- */
-
-#profile-stats {
-    background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
-    border-radius: 1rem;
-    padding: 1.5rem;
-    box-shadow: 0 0.5rem 1rem color-mix(in oklch, var(--color-accent), canvas 70%);
-    margin-bottom: 2rem;
-    max-width: 100%;
-}
-
-#profile-stats:hover {
-    box-shadow: 0 8px 16px color-mix(in oklch, var(--color-accent), canvas 50%);
-}
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
-    gap: 1rem;
-    text-align: center;
-}
-
-.stat-label {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+.project-year {
+    font-family: Baskerville;
+    font-variant-numeric: oldstyle-nums;
+    font-style: italic;
     color: var(--label-color);
-    /* opacity: 0.9; */
 }
 
-.stat-value {
-    font-size: 1.75rem;
-    font-weight: bold;
+#projects-pie-plot {
+    max-width: 20em;
+    margin-block: 2em;
+    overflow: visible;
+}
+
+.swatch {
+    display: inline-block;
+    width: 1em;
+    aspect-ratio: 1 / 1;
+    background: var(--color);
+    border-radius: 50%;
+}
+
+.legend {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
+    gap: 1em;
+    border: 1px solid #ccc;
+    padding: 1em;
+}
+
+.legend li {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    gap: 2em;
+}
+
+&:has(path:hover) {
+    path:not(:hover) {
+        opacity: 0.5;
+    }
+}
+
+path {
+    transition: 300ms;
+    cursor: pointer;
+}
+
+.selected {
+    --color: oklch(60% 45% 0) !important;
+
+    &:is(path) {
+        fill: var(--color);
+    }
 }

@@ -1,25 +1,25 @@
 [
     {
         "title": "Project 1",
-        "year": "2020",
+        "year": "2021",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et quo veniam corporis cupiditate, sed sequi expedita atque saepe at? Velit quisquam deleniti nemo aliquam a vel unde voluptatibus assumenda facilis!"
     },
     {
         "title": "Project 2",
-        "year": "2020",
+        "year": "2021",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Accusantium esse nihil labore? Laboriosam est esse temporibus quaerat eius magni, natus non, nam eos quo amet dicta iste reiciendis odit sunt soluta recusandae quis sed quasi! Non, expedita aliquam!"
     },
     {
         "title": "Project 3",
-        "year": "2021",
+        "year": "2022",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Quae accusantium recusandae, inventore doloremque error similique sunt incidunt autem aperiam animi distinctio repudiandae et, veniam ab amet obcaecati eligendi? Architecto repudiandae possimus delectus autem saepe tenetur pariatur nostrum itaque."
     },
     {
         "title": "Project 4",
-        "year": "2021",
+        "year": "2022",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Optio totam officia quos reprehenderit. Quo, unde debitis porro ipsa eaque natus voluptatibus totam doloremque? Unde, sapiente fugiat! Ipsum fugiat rem aliquam, est magni pariatur nam ea eaque a iure?"
     },
@@ -31,7 +31,7 @@
     },
     {
         "title": "Project 6",
-        "year": "2022",
+        "year": "2023",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Excepturi iure neque ab non in quibusdam, unde quo eveniet harum beatae distinctio officia. Soluta hic, aliquid neque, consequuntur animi perspiciatis ab ad ea dolorem modi saepe aut dolorum quo."
     },
@@ -49,7 +49,7 @@
     },
     {
         "title": "Project 9",
-        "year": "2024",
+        "year": "2023",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Sit praesentium veritatis amet maiores sequi distinctio enim ea quidem quo eligendi cumque sapiente in temporibus rem quis, rerum voluptatem ut reprehenderit! Facilis debitis, laudantium accusantium aut assumenda fugiat accusamus."
     },
@@ -61,13 +61,13 @@
     },
     {
         "title": "Project 11",
-        "year": "2025",
+        "year": "2024",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Tempore consequuntur voluptate expedita ipsa suscipit voluptas obcaecati deleniti earum, nemo ea? Porro, similique. Hic quisquam accusantium, quia deleniti unde saepe provident. Soluta officia perferendis maxime quis ipsam cumque magni!"
     },
     {
         "title": "Project 12",
-        "year": "2025",
+        "year": "2024",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Blanditiis explicabo unde libero maxime amet tempora asperiores nobis necessitatibus corrupti. Et autem praesentium soluta ipsum, sapiente ratione libero molestias dolore vero illum dolorem officiis mollitia placeat vitae id perferendis!"
     }
