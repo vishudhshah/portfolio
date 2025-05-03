@@ -13,6 +13,7 @@ if (projectsTitle) {
 // PIE CHART
 
 let selectedIndex = -1;
+let currentFilteredProjects = projects; // 5.4
 
 function renderPieChart(projectsGiven) {
     // re-calculate rolled data
@@ -28,7 +29,7 @@ function renderPieChart(projectsGiven) {
     }));
 
     // re-calculate slice generator, arc data, arc, etc.
-    let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
+    let arcGenerator = d3.arc().innerRadius(0).outerRadius(50); // increase inner radius to create a donut chart
     let sliceGenerator = d3.pie().value((d) => d.value);
     let arcData = sliceGenerator(data);
     let arcs = arcData.map((d) => arcGenerator(d));
@@ -67,10 +68,10 @@ function renderPieChart(projectsGiven) {
                 // filter projects by selected year
                 if (selectedIndex === -1) {
                     // no selection, show all projects
-                    renderProjects(projects, projectsContainer, 'h2');
+                    renderProjects(currentFilteredProjects, projectsContainer, 'h2'); // 5.4
                 } else {
                     const selectedYear = data[selectedIndex].label;
-                    const filteredProjects = projects.filter((project) => project.year === selectedYear);
+                    const filteredProjects = currentFilteredProjects.filter((project) => project.year === selectedYear); // 5.4
                     renderProjects(filteredProjects, projectsContainer, 'h2');
                 }
             });
@@ -97,12 +98,12 @@ searchInput.addEventListener('input', (event) => {
     query = event.target.value;
 
     // filter projects
-    let filteredProjects = projects.filter((project) => {
+    currentFilteredProjects = projects.filter((project) => { // 5.4
         let values = Object.values(project).join('\n').toLowerCase();
         return values.includes(query.toLowerCase());
     });
     
     // re-render filtered projects and pie chart
-    renderProjects(filteredProjects, projectsContainer, 'h2');
-    renderPieChart(filteredProjects);
+    renderProjects(currentFilteredProjects, projectsContainer, 'h2'); // 5.4
+    renderPieChart(currentFilteredProjects); // 5.4
 });
