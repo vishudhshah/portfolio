@@ -29,7 +29,7 @@ function renderPieChart(projectsGiven) {
     }));
 
     // re-calculate slice generator, arc data, arc, etc.
-    let arcGenerator = d3.arc().innerRadius(0).outerRadius(50); // increase inner radius to create a donut chart
+    let arcGenerator = d3.arc().innerRadius(25).outerRadius(50); // increase inner radius to create a donut chart
     let sliceGenerator = d3.pie().value((d) => d.value);
     let arcData = sliceGenerator(data);
     let arcs = arcData.map((d) => arcGenerator(d));
