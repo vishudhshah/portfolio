@@ -106,6 +106,7 @@ nav a:hover {
 
 .stat-value {
     font-size: 1.75rem;
+    font-weight: bold;
 }
 
 /* --- Projects --- */
@@ -250,5 +251,16 @@ path {
 
 .stats dd {
     font-size: 1.75rem;
+    font-weight: bold;
     margin: 0;
+}
+
+.gridlines line {
+    stroke: #aaa;
+    stroke-opacity: 0.3;
+    shape-rendering: crispEdges;
+}
+
+.gridlines path {
+    display: none;
 }
