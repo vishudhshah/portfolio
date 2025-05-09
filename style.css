@@ -264,3 +264,43 @@ path {
 .gridlines path {
     display: none;
 }
+
+dl.info {
+    display: grid;
+    grid-template-columns: max-content auto;
+    gap: 0.25em 1em;
+    font-size: 0.9em;
+    padding: 1em;
+    border-radius: 0.5em;
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(6px);
+    border: 1px solid #ccc;
+    max-width: 300px;
+
+    transition-duration: 500ms;
+    transition-property: opacity, visibility;
+}
+
+.tooltip {
+    position: fixed;
+    top: 1em;
+    left: 1em;
+    z-index: 10;
+}
+
+/* Hidden by default unless explicitly shown */
+dl.info[hidden]:not(:hover, :focus-within) {
+    opacity: 0;
+    visibility: hidden;
+}
+
+circle {
+    transition: 200ms;
+    transform-origin: center;
+    transform-box: fill-box;
+}
+
+circle:hover {
+    transform: scale(1.5);
+}
