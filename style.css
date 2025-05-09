@@ -1,6 +1,6 @@
 :root {
     --color-accent: oklch(65% 50% 0); /* A vibrant pink – customize if you like */
-    --label-color: color-mix(in oklch, var(--color-accent), canvas 5%);
+    --label-color: color-mix(in oklch, var(--color-accent), canvas 5%); /* A slightly less vibrant pink */
 }
 
 .color-scheme {
@@ -25,6 +25,8 @@ body {
     margin-inline: max(1em, (100% - 100ch) / 2);
     padding: 2em 1em;
 }
+
+/* --- Nav Bar --- */
 
 nav {
     display: flex;
@@ -57,7 +59,7 @@ nav a:hover {
     padding-bottom: 0.1em; /* Keeps height consistent on hover */
 }
 
-/* --- Resume Specific Styles --- */
+/* --- Resume --- */
 
 #resume > .card {
     background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
@@ -71,7 +73,7 @@ nav a:hover {
     box-shadow: 0 8px 16px color-mix(in oklch, var(--color-accent), canvas 50%);
 }
 
-/* --- GH Stats --- */
+/* --- Home Page GH Stats --- */
 
 #profile-stats {
     background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
@@ -95,6 +97,7 @@ nav a:hover {
 
 .stat-label {
     font-size: 0.75rem;
+    font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--label-color);
@@ -103,10 +106,9 @@ nav a:hover {
 
 .stat-value {
     font-size: 1.75rem;
-    font-weight: bold;
 }
 
-/* --- Project Specific Styles --- */
+/* --- Projects --- */
 
 form {
     display: grid;
@@ -215,4 +217,38 @@ path {
     &:is(path) {
         fill: var(--color);
     }
+}
+
+/* --- Meta --- */
+
+.stats {
+    background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 0.5rem 1rem color-mix(in oklch, var(--color-accent), canvas 70%);
+    margin-bottom: 2rem;
+    max-width: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
+    gap: 1rem;
+    text-align: center;
+}
+
+.stats:hover {
+    box-shadow: 0 8px 16px color-mix(in oklch, var(--color-accent), canvas 50%);
+}
+
+.stats dt {
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--label-color);
+    margin: 0;
+}
+
+.stats dd {
+    font-size: 1.75rem;
+    margin: 0;
 }
