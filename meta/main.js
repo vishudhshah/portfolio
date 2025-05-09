@@ -1,4 +1,6 @@
 import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
+let xScale;
+let yScale;
 
 async function loadData() {
     const data = await d3.csv('./loc.csv', (row) => ({
@@ -151,22 +153,30 @@ function renderScatterPlot(data, commits) {
         height: height - margin.top - margin.bottom
     };
 
+    // Create the SVG element
     const svg = d3
         .select('#chart')
         .append('svg')
         .attr('viewBox', `0 0 ${width} ${height}`)
         .style('overflow', 'visible');
 
-    const xScale = d3
+    // Create scales
+    xScale = d3
         .scaleTime()
         .domain(d3.extent(commits, d => d.datetime))
         .range([usableArea.left, usableArea.right])
         .nice();
 
-    const yScale = d3
+    yScale = d3
         .scaleLinear()
         .domain([0, 24])
         .range([usableArea.bottom, usableArea.top]);
+
+    const [minLines, maxLines] = d3.extent(commits, d => d.totalLines);
+    const rScale = d3
+        .scaleSqrt()
+        .domain([minLines, maxLines])
+        .range([5, 50]); // Adjust to control circle sizes based on experimentation
 
     // Helper function to get color based on hour
     function getHourColor(hour) {
@@ -207,14 +217,10 @@ function renderScatterPlot(data, commits) {
         .attr('transform', `translate(${usableArea.left}, 0)`)
         .call(yAxis);
 
-    const [minLines, maxLines] = d3.extent(commits, d => d.totalLines);
-    const rScale = d3
-        .scaleSqrt()
-        .domain([minLines, maxLines])
-        .range([5, 50]); // Adjust to control circle sizes based on experimentation
-
+    // Sort commits by total lines to make it easier to hover over overlapping dots
     const sortedCommits = d3.sort(commits, d => -d.totalLines);
 
+    // Render dots
     const dots = svg
         .append('g')
         .attr('class', 'dots');
@@ -229,7 +235,7 @@ function renderScatterPlot(data, commits) {
         .attr('fill', d => getHourColor(d.hourFrac))
         .attr('fill-opacity', 0.7)
         .on('mouseenter', (event, commit) => {
-            d3.select(event.currentTarget).style('fill-opacity', 1);
+            // d3.select(event.currentTarget).style('fill-opacity', 1);
             renderTooltipContent(commit);
             updateTooltipVisibility(true);
             updateTooltipPosition(event);
@@ -238,9 +244,82 @@ function renderScatterPlot(data, commits) {
             updateTooltipPosition(event);
         })
         .on('mouseleave', () => {
-            d3.select(event.currentTarget).style('fill-opacity', 0.7);
+            // d3.select(event.currentTarget).style('fill-opacity', 0.7);
             updateTooltipVisibility(false);
         });
+
+    function brushed(event) {
+        const selection = event.selection;
+        d3.selectAll('circle').classed('selected', d => isCommitSelected(selection, d));
+        renderSelectionCount(selection, commits);
+        renderLanguageBreakdown(selection, commits);
+    }
+
+    // Create brush for selection
+    svg.call(d3.brush().on('start brush end', brushed));
+    svg.selectAll('.dots, .overlay ~ *').raise();
+}
+
+function isCommitSelected(selection, commit) {
+    if (!selection) return false;
+
+    const [x0, x1] = selection.map(d => d[0]);
+    const [y0, y1] = selection.map(d => d[1]);
+
+    const x = xScale(commit.datetime);
+    const y = yScale(commit.hourFrac);
+
+    return x >= x0 && x <= x1 && y >= y0 && y <= y1;
+}
+
+function renderSelectionCount(selection, commits) {
+    const selectedCommits = selection
+        ? commits.filter(d => isCommitSelected(selection, d))
+        : [];
+
+    const countElement = document.querySelector('#selection-count');
+    countElement.textContent = `${selectedCommits.length || 'No'} commits selected`;
+
+    return selectedCommits;
+}
+
+function renderLanguageBreakdown(selection, commits) {
+    const selectedCommits = selection
+        ? commits.filter(d => isCommitSelected(selection, d))
+        : [];
+
+    const container = document.getElementById('language-breakdown');
+
+    if (selectedCommits.length === 0) {
+        container.innerHTML = '';
+        container.setAttribute('hidden', 'true');
+        return;
+    }
+    container.removeAttribute('hidden');
+
+    // Flatten all the lines across selected commits
+    const lines = selectedCommits.flatMap(d => d.lines);
+
+    // Count lines per language
+    const breakdown = d3.rollup(
+        lines,
+        v => v.length,
+        d => d.type
+    );
+
+    container.innerHTML = '';
+
+    for (const [language, count] of breakdown) {
+        const proportion = count / lines.length;
+        const formatted = d3.format('.1~%')(proportion);
+
+        container.innerHTML += `
+            <div class="stat">
+                <dt>${language}</dt>
+                <dd>${count} lines<br>(${formatted})</dd>
+            </div>
+        `;
+    }
 }
 
 let data = await loadData();
