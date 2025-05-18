@@ -2,7 +2,7 @@
     {
         "title": "Chaining the Hub",
         "year": "2025",
-        "image": "../images/chaining-the-hub.png",
+        "image": "/images/chaining-the-hub.png",
         "description": "An interactive map visualization of Boston's bike traffic during different times of the day using Mapbox and D3.",
         "url": "https://vishudhshah.github.io/chaining-the-hub"
     },
