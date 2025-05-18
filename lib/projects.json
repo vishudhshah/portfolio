@@ -1,74 +1,86 @@
 [
     {
-        "title": "Project 1",
-        "year": "2021",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et quo veniam corporis cupiditate, sed sequi expedita atque saepe at? Velit quisquam deleniti nemo aliquam a vel unde voluptatibus assumenda facilis!"
+        "title": "Chaining the Hub",
+        "year": "2025",
+        "image": "../images/chaining-the-hub.png",
+        "description": "An interactive map visualization of Boston's bike traffic during different times of the day using Mapbox and D3.",
+        "url": "https://vishudhshah.github.io/chaining-the-hub"
     },
     {
         "title": "Project 2",
         "year": "2021",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Accusantium esse nihil labore? Laboriosam est esse temporibus quaerat eius magni, natus non, nam eos quo amet dicta iste reiciendis odit sunt soluta recusandae quis sed quasi! Non, expedita aliquam!"
+        "description": "Accusantium esse nihil labore? Laboriosam est esse temporibus quaerat eius magni, natus non, nam eos quo amet dicta iste reiciendis odit sunt soluta recusandae quis sed quasi! Non, expedita aliquam!",
+        "url": ""
     },
     {
         "title": "Project 3",
         "year": "2022",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Quae accusantium recusandae, inventore doloremque error similique sunt incidunt autem aperiam animi distinctio repudiandae et, veniam ab amet obcaecati eligendi? Architecto repudiandae possimus delectus autem saepe tenetur pariatur nostrum itaque."
+        "description": "Quae accusantium recusandae, inventore doloremque error similique sunt incidunt autem aperiam animi distinctio repudiandae et, veniam ab amet obcaecati eligendi? Architecto repudiandae possimus delectus autem saepe tenetur pariatur nostrum itaque.",
+        "url": ""
     },
     {
         "title": "Project 4",
         "year": "2022",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Optio totam officia quos reprehenderit. Quo, unde debitis porro ipsa eaque natus voluptatibus totam doloremque? Unde, sapiente fugiat! Ipsum fugiat rem aliquam, est magni pariatur nam ea eaque a iure?"
+        "description": "Optio totam officia quos reprehenderit. Quo, unde debitis porro ipsa eaque natus voluptatibus totam doloremque? Unde, sapiente fugiat! Ipsum fugiat rem aliquam, est magni pariatur nam ea eaque a iure?",
+        "url": ""
     },
     {
         "title": "Project 5",
         "year": "2022",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Consequuntur, quibusdam id repellat aspernatur ducimus ratione iste veniam obcaecati repudiandae. Autem, pariatur quae assumenda praesentium aut tenetur saepe corrupti? Quidem aspernatur dolorum maxime est nihil eius aperiam tempora perferendis!"
+        "description": "Consequuntur, quibusdam id repellat aspernatur ducimus ratione iste veniam obcaecati repudiandae. Autem, pariatur quae assumenda praesentium aut tenetur saepe corrupti? Quidem aspernatur dolorum maxime est nihil eius aperiam tempora perferendis!",
+        "url": ""
     },
     {
         "title": "Project 6",
         "year": "2023",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Excepturi iure neque ab non in quibusdam, unde quo eveniet harum beatae distinctio officia. Soluta hic, aliquid neque, consequuntur animi perspiciatis ab ad ea dolorem modi saepe aut dolorum quo."
+        "description": "Excepturi iure neque ab non in quibusdam, unde quo eveniet harum beatae distinctio officia. Soluta hic, aliquid neque, consequuntur animi perspiciatis ab ad ea dolorem modi saepe aut dolorum quo.",
+        "url": ""
     },
     {
         "title": "Project 7",
         "year": "2023",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Sequi, corrupti tempora consequuntur magnam, rerum at fugiat voluptas dolores sapiente fuga tenetur nihil nobis corporis, voluptatum dolor molestiae unde. Ipsam maxime expedita quidem, quo excepturi quasi omnis iure quae."
+        "description": "Sequi, corrupti tempora consequuntur magnam, rerum at fugiat voluptas dolores sapiente fuga tenetur nihil nobis corporis, voluptatum dolor molestiae unde. Ipsam maxime expedita quidem, quo excepturi quasi omnis iure quae.",
+        "url": ""
     },
     {
         "title": "Project 8",
         "year": "2023",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Corporis aliquid, doloremque est exercitationem obcaecati quisquam, unde, nostrum facilis a veritatis labore perferendis quo dolores illo ducimus sit voluptate quos cumque soluta enim maxime. Deserunt doloremque saepe culpa. Expedita."
+        "description": "Corporis aliquid, doloremque est exercitationem obcaecati quisquam, unde, nostrum facilis a veritatis labore perferendis quo dolores illo ducimus sit voluptate quos cumque soluta enim maxime. Deserunt doloremque saepe culpa. Expedita.",
+        "url": ""
     },
     {
         "title": "Project 9",
         "year": "2023",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Sit praesentium veritatis amet maiores sequi distinctio enim ea quidem quo eligendi cumque sapiente in temporibus rem quis, rerum voluptatem ut reprehenderit! Facilis debitis, laudantium accusantium aut assumenda fugiat accusamus."
+        "description": "Sit praesentium veritatis amet maiores sequi distinctio enim ea quidem quo eligendi cumque sapiente in temporibus rem quis, rerum voluptatem ut reprehenderit! Facilis debitis, laudantium accusantium aut assumenda fugiat accusamus.",
+        "url": ""
     },
     {
         "title": "Project 10",
         "year": "2024",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Vel obcaecati nam, saepe, iure ipsam provident quod quas sint quidem impedit velit omnis dignissimos incidunt amet odit ullam neque nobis consequatur fugiat sequi, doloremque excepturi expedita. Praesentium, eligendi quaerat!"
+        "description": "Vel obcaecati nam, saepe, iure ipsam provident quod quas sint quidem impedit velit omnis dignissimos incidunt amet odit ullam neque nobis consequatur fugiat sequi, doloremque excepturi expedita. Praesentium, eligendi quaerat!",
+        "url": ""
     },
     {
         "title": "Project 11",
         "year": "2024",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Tempore consequuntur voluptate expedita ipsa suscipit voluptas obcaecati deleniti earum, nemo ea? Porro, similique. Hic quisquam accusantium, quia deleniti unde saepe provident. Soluta officia perferendis maxime quis ipsam cumque magni!"
+        "description": "Tempore consequuntur voluptate expedita ipsa suscipit voluptas obcaecati deleniti earum, nemo ea? Porro, similique. Hic quisquam accusantium, quia deleniti unde saepe provident. Soluta officia perferendis maxime quis ipsam cumque magni!",
+        "url": ""
     },
     {
         "title": "Project 12",
         "year": "2024",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Blanditiis explicabo unde libero maxime amet tempora asperiores nobis necessitatibus corrupti. Et autem praesentium soluta ipsum, sapiente ratione libero molestias dolore vero illum dolorem officiis mollitia placeat vitae id perferendis!"
+        "description": "Blanditiis explicabo unde libero maxime amet tempora asperiores nobis necessitatibus corrupti. Et autem praesentium soluta ipsum, sapiente ratione libero molestias dolore vero illum dolorem officiis mollitia placeat vitae id perferendis!",
+        "url": ""
     }
 ]
