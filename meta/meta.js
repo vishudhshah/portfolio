@@ -375,7 +375,7 @@ function updateFileDisplay(filteredCommits) {
         .map(([name, lines]) => {
             return { name, lines };
         })
-        .sort((a, b) => b.lines.length - a.lines.length); // Sorting added for consistency with Step 2.3
+        .sort((a, b) => b.lines.length - a.lines.length);
 
     let filesContainer = d3
         .select('#files')
@@ -388,8 +388,14 @@ function updateFileDisplay(filteredCommits) {
                     div.append('dd');
                 })
         );
-    filesContainer.select('dt > code').text(d => d.name);
-    filesContainer.select('dd').text(d => `${d.lines.length} lines`);
+
+    filesContainer.select('dt > code').html(d => `${d.name}<small>${d.lines.length} lines</small>`);
+    filesContainer
+        .select('dd')
+        .selectAll('div')
+        .data(d => d.lines)
+        .join('div')
+        .attr('class', 'loc');
 }
 
 function onTimeSliderChange() {
