@@ -369,6 +369,7 @@ function renderLanguageBreakdown(selection, commits) {
 }
 
 function updateFileDisplay(filteredCommits) {
+    let colors = d3.scaleOrdinal(d3.schemeTableau10);
     let lines = filteredCommits.flatMap(d => d.lines);
     let files = d3
         .groups(lines, d => d.file)
@@ -395,7 +396,8 @@ function updateFileDisplay(filteredCommits) {
         .selectAll('div')
         .data(d => d.lines)
         .join('div')
-        .attr('class', 'loc');
+        .attr('class', 'loc')
+        .attr('style', d => `--color: ${colors(d.type)}`);
 }
 
 function onTimeSliderChange() {
