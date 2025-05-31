@@ -323,7 +323,7 @@ circle.selected {
     fill: #ff6b6b;
 }
 
-.language-breakdown {
+#language-breakdown {
     background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
     border-radius: 1rem;
     padding: 1.5rem;
@@ -340,14 +340,14 @@ circle.selected {
     transition: opacity 0.5s ease;
 }
 
-.language-breakdown[hidden] {
+#language-breakdown[hidden] {
     opacity: 0;
     pointer-events: none;
     height: 0;
     overflow: hidden;
 }
 
-.language-breakdown .stat dt {
+#language-breakdown .stat dt {
     font-family: monospace;
     font-size: 0.75rem;
     font-weight: bold;
@@ -357,7 +357,7 @@ circle.selected {
     margin: 0;
 }
 
-.language-breakdown .stat dd {
+#language-breakdown .stat dd {
     font-family: monospace;
     font-size: 1.2rem;
     font-weight: bold;
@@ -439,4 +439,26 @@ dd {
     display: block;
     font-size: 0.8em;
     opacity: 0.7;
+}
+
+#scrolly-1 {
+    position: relative;
+    display: flex;
+    gap: 1rem;
+
+    > * {
+        flex: 1;
+    }
+}
+
+#scatter-story {
+    position: relative;
+}
+
+#scatter-plot {
+    position: sticky;
+    top: 0;
+    left: 0;
+    bottom: auto;
+    height: 50vh;
 }

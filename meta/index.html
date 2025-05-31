@@ -18,8 +18,6 @@
     <h2>Summary</h2>
     <div id="stats"></div>
 
-    <h2>Commits by time of day</h2>
-
     <div class="time-filter">
         <label for="commit-progress">
             Show commits until:
@@ -28,21 +26,17 @@
         <time id="commit-time"></time>
     </div>
 
-    <dl id="files">
-        <!-- we want the following structure for each file:
-        <div>
-            <dt>
-                <code>{file.name}</code>
-            </dt>
-            <dd>{file.lines.length} lines</dd>
+    <div id="scrolly-1">
+        <div id="scatter-story">some filler text here</div>
+
+        <div id="scatter-plot">
+            <div id="chart">
+                <h2>Commits by time of day</h2>
+            </div>
+            <div id="selection-count">No commits selected</div>
+            <div id="language-breakdown" hidden></div>
         </div>
-        -->
-    </dl>
-
-    <div id="chart"></div>
-
-    <p id="selection-count">No commits selected</p>
-    <dl id="language-breakdown" class="language-breakdown" hidden></dl>
+    </div>
 
     <dl id="commit-tooltip" class="info tooltip" hidden>
         <dt>Commit</dt>
@@ -54,6 +48,8 @@
         <dd id="commit-date"></dd>
         <!-- Add time, author, lines edited, ... -->
     </dl>
+
+    <dl id="files"></dl>
 </body>
 
 </html>
