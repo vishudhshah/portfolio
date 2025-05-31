@@ -236,6 +236,7 @@ function renderScatterPlot(data, commits) {
         .attr('cx', d => xScale(d.datetime))
         .attr('cy', d => yScale(d.hourFrac))
         .attr('r', d => rScale(d.totalLines))
+        .style('--r', d => rScale(d.totalLines))
         .attr('fill', d => getHourColor(d.hourFrac))
         .attr('fill-opacity', 0.7)
         .on('mouseenter', (event, commit) => {
@@ -283,6 +284,7 @@ function updateScatterPlot(data, commits) {
         .attr('cx', d => xScale(d.datetime))
         .attr('cy', d => yScale(d.hourFrac))
         .attr('r', d => rScale(d.totalLines))
+        .style('--r', d => rScale(d.totalLines))
         .attr('fill', d => {
             const hour = d.hourFrac;
             if (hour >= 5 && hour < 12) return '#f4a261';

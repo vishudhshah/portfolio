@@ -386,3 +386,13 @@ circle.selected {
 #commit-progress {
     width: 60%;
 }
+
+circle {
+    transition: all 200ms ease, r calc(var(--r) * 100ms);
+    transform-origin: center;
+    transform-box: fill-box;
+
+    @starting-style {
+        r: 0;
+    }
+}
