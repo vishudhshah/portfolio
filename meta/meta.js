@@ -1,7 +1,10 @@
 import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
+import scrollama from 'https://cdn.jsdelivr.net/npm/scrollama@3.2.0/+esm';
+
 let xScale;
 let yScale;
-let commitProgress = 100;
+let data, commits, timeScale;
+let filteredCommits;
 
 
 async function loadData() {
@@ -19,11 +22,10 @@ async function loadData() {
 
 function processCommits(data) {
     return d3
-        .groups(data, d => d.commit) // group all rows by commit ID
+        .groups(data, d => d.commit)
         .map(([commit, lines]) => {
             let first = lines[0];
             let { author, date, time, timezone, datetime } = first;
-            
             let ret = {
                 id: commit,
                 url: 'https://github.com/vishudhshah/portfolio/commit/' + commit,
@@ -32,23 +34,18 @@ function processCommits(data) {
                 time,
                 timezone,
                 datetime,
-                // Calculate hour as a decimal for time analysis
-                // e.g., 2:30 PM = 14.5
                 hourFrac: datetime.getHours() + datetime.getMinutes() / 60,
-                // How many lines were modified?
                 totalLines: lines.length,
             };
-            
-            // Add the lines array as a hidden property
             Object.defineProperty(ret, 'lines', {
                 value: lines,
-                writable: false, // default
+                writable: false,
                 configurable: true,
-                enumerable: false // default
+                enumerable: false
             });
-            
             return ret;
-        });
+        })
+        .sort((a, b) => a.datetime - b.datetime);
 }
 
 function renderCommitInfo(data, commits) {
@@ -335,9 +332,9 @@ function renderLanguageBreakdown(selection, commits) {
         : [];
 
     const container = document.getElementById('language-breakdown');
+    const statsContainer = document.getElementById('language-stats');
 
     if (selectedCommits.length === 0) {
-        container.innerHTML = '';
         container.setAttribute('hidden', 'true');
         return;
     }
@@ -353,19 +350,44 @@ function renderLanguageBreakdown(selection, commits) {
         d => d.type
     );
 
-    container.innerHTML = '';
+    statsContainer.innerHTML = '';
 
     for (const [language, count] of breakdown) {
         const proportion = count / lines.length;
         const formatted = d3.format('.1~%')(proportion);
 
-        container.innerHTML += `
+        statsContainer.innerHTML += `
             <div class="stat">
                 <dt>${language}</dt>
                 <dd>${count} lines<br>(${formatted})</dd>
             </div>
         `;
     }
+}
+
+// Tab functionality
+function initializeTabs() {
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const targetTab = button.getAttribute('data-tab');
+
+            // Remove active class from all buttons and contents
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            // Add active class to clicked button and corresponding content
+            button.classList.add('active');
+            document.getElementById(targetTab).classList.add('active');
+
+            // If switching to files tab, update file display
+            if (targetTab === 'files-tab') {
+                updateFileDisplay(filteredCommits);
+            }
+        });
+    });
 }
 
 function updateFileDisplay(filteredCommits) {
@@ -400,37 +422,138 @@ function updateFileDisplay(filteredCommits) {
         .attr('style', d => `--color: ${colors(d.type)}`);
 }
 
-function onTimeSliderChange() {
-    const slider = document.getElementById("commit-progress");
-    commitProgress = +slider.value;
-    commitMaxTime = timeScale.invert(commitProgress);
-
-    const timeLabel = document.getElementById("commit-time");
-    timeLabel.textContent = commitMaxTime.toLocaleString("en", {
-        dateStyle: "long",
-        timeStyle: "short",
-    });
-
-    filteredCommits = commits.filter(d => d.datetime <= commitMaxTime);
+function onStepEnter(response) {
+    const commitDate = response.element.__data__.datetime;
+    const maxTime = commitDate;
+    filteredCommits = commits.filter(d => d.datetime <= maxTime);
     updateScatterPlot(data, filteredCommits);
-    updateFileDisplay(filteredCommits);
+    
+    // Update file display if files tab is active
+    const filesTab = document.getElementById('files-tab');
+    if (filesTab.classList.contains('active')) {
+        updateFileDisplay(filteredCommits);
+    }
+    
+    console.log(`Active commit: ${commitDate}`);
 }
 
+function onFileStepEnter(response) {
+    const commitDate = response.element.__data__.datetime;
+    const maxTime = commitDate;
+    const fileFilteredCommits = commits.filter(d => d.datetime <= maxTime);
+    updateFileDisplay(fileFilteredCommits);
+    
+    // Update the step indicator
+    const stepIndex = response.index;
+    const totalSteps = commits.length;
+    const currentCommitEl = document.getElementById('current-commit');
+    if (currentCommitEl) {
+        currentCommitEl.textContent = `Commit ${stepIndex + 1}`;
+    }
+    
+    console.log(`File evolution step ${stepIndex + 1}/${totalSteps} at: ${commitDate.toLocaleDateString()}`);
+}
 
-let data = await loadData();
+async function initializeApp() {
+    data = await loadData();
+    commits = processCommits(data);
+    
+    timeScale = d3
+        .scaleTime()
+        .domain(d3.extent(data, d => d.datetime))
+        .range([0, 100]);
 
-let commits = processCommits(data);
+    filteredCommits = commits;
 
-let timeScale = d3
-    .scaleTime()
-    .domain(d3.extent(data, d => d.datetime))
-    .range([0, 100]);
+    renderCommitInfo(data, commits);
+    renderScatterPlot(data, commits);
+    initializeTabs();
 
-let commitMaxTime = timeScale.invert(commitProgress);
-let filteredCommits = commits;
+    // Set up total commits count
+    const totalCommitsEl = document.getElementById('total-commits');
+    if (totalCommitsEl) {
+        totalCommitsEl.textContent = commits.length;
+    }
 
-renderCommitInfo(data, commits);
-renderScatterPlot(data, commits);
+    // Create scrollytelling content for commits
+    d3
+        .select('#scatter-story')
+        .selectAll('.step')
+        .data(commits)
+        .join('div')
+        .attr('class', 'step')
+        .html(
+            (d, i) => `
+                On ${d.datetime.toLocaleString('en', {
+            dateStyle: 'full',
+            timeStyle: 'short',
+            })},
+                I made <a href="${d.url}" target="_blank">${
+            i > 0 ? 'another glorious commit' : 'my first commit, and it was glorious'
+            }</a>.
+                I edited ${d.totalLines} lines across ${
+            d3.rollups(
+                d.lines,
+                (D) => D.length,
+                (d) => d.file,
+            ).length
+            } files.
+                Then I looked over all I had made, and I saw that it was very good.
+            `,
+        );
 
-document.getElementById("commit-progress").addEventListener("input", onTimeSliderChange);
-onTimeSliderChange();
+    // Create scrollytelling content for file evolution
+    d3
+        .select('#file-story')
+        .selectAll('.step')
+        .data(commits)
+        .join('div')
+        .attr('class', 'step')
+        .html(
+            (d, i) => {
+                const fileCount = d3.rollups(
+                    d.lines,
+                    (D) => D.length,
+                    (d) => d.file,
+                ).length;
+                
+                const languages = d3.rollups(
+                    d.lines,
+                    v => v.length,
+                    d => d.type
+                );
+                
+                const languageText = languages.length > 1 
+                    ? `${languages.length} different languages`
+                    : `${languages[0]?.[0] || 'code'}`;
+                
+                return `
+                    <h3>Commit ${i + 1}: ${d.datetime.toLocaleDateString('en', { dateStyle: 'medium' })}</h3>
+                    <p>Modified <strong>${d.totalLines} lines</strong> across <strong>${fileCount} files</strong> 
+                    using ${languageText}. Watch how the codebase structure evolves with each commit.</p>
+                    <small>Time: ${d.datetime.toLocaleTimeString('en', { timeStyle: 'short' })}</small>
+                `;
+            }
+        );
+
+    // Initialize scrollama for commits tab
+    const commitsScroller = scrollama();
+    commitsScroller
+        .setup({
+            container: '#scrolly-1',
+            step: '#scatter-story .step',
+        })
+        .onStepEnter(onStepEnter);
+
+    // Initialize scrollama for files tab
+    const filesScroller = scrollama();
+    filesScroller
+        .setup({
+            container: '#file-scrolly',
+            step: '#file-story .step',
+        })
+        .onStepEnter(onFileStepEnter);
+}
+
+// Initialize the app
+initializeApp();

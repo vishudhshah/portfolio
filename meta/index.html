@@ -18,23 +18,52 @@
     <h2>Summary</h2>
     <div id="stats"></div>
 
-    <div class="time-filter">
-        <label for="commit-progress">
-            Show commits until:
-            <input type="range" id="commit-progress" min="0" max="100" value="100" />
-        </label>
-        <time id="commit-time"></time>
-    </div>
+    <!-- Tab Navigation -->
+    <div class="tab-container">
+        <div class="tab-nav">
+            <button class="tab-button active" data-tab="commits-tab">Commits by Time</button>
+            <button class="tab-button" data-tab="files-tab">File Evolution</button>
+        </div>
 
-    <div id="scrolly-1">
-        <div id="scatter-story">some filler text here</div>
+        <!-- Commits by Time Tab -->
+        <div id="commits-tab" class="tab-content active">
+            <div id="scrolly-1">
+                <div id="scatter-story"></div>
 
-        <div id="scatter-plot">
-            <div id="chart">
-                <h2>Commits by time of day</h2>
+                <div id="scatter-plot">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h2>Commits by time of day</h2>
+                            <div id="selection-count">No commits selected</div>
+                        </div>
+                        <div id="chart"></div>
+                    </div>
+                    <div id="language-breakdown" class="chart-card" hidden>
+                        <div class="chart-header">
+                            <h2>Language Breakdown</h2>
+                        </div>
+                        <div id="language-stats"></div>
+                    </div>
+                </div>
             </div>
-            <div id="selection-count">No commits selected</div>
-            <div id="language-breakdown" hidden></div>
+        </div>
+
+        <!-- File Evolution Tab -->
+        <div id="files-tab" class="tab-content">
+            <div id="file-scrolly">
+                <div id="file-story"></div>
+                <div id="file-evolution">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h2>File Evolution</h2>
+                            <div id="evolution-progress" class="progress-indicator">
+                                <span id="current-commit">Commit 1</span> of <span id="total-commits">0</span>
+                            </div>
+                        </div>
+                        <dl id="files"></dl>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -48,8 +77,6 @@
         <dd id="commit-date"></dd>
         <!-- Add time, author, lines edited, ... -->
     </dl>
-
-    <dl id="files"></dl>
 </body>
 
 </html>
